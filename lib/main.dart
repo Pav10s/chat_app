@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Constants().primaryColor),
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: _isLoggedIn ? const HomePage() : const LoginPage(),
     );
   }
