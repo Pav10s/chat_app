@@ -17,8 +17,7 @@ void main() async {
             appId: Constants.appId,
             messagingSenderId: Constants.messagingSenderId,
             projectId: Constants.projectId));
-  }
-  else {
+  } else {
     await Firebase.initializeApp();
   }
 
@@ -40,7 +39,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     getUserLoggedInStatus();
   }
-  
+
   getUserLoggedInStatus() async {
     await HelperFunction.getUserLoggedInKey().then((value) {
       if (value != null) {
@@ -53,7 +52,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Constants().primaryColor),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       home: _isLoggedIn ? const HomePage() : const LoginPage(),
     );
   }
