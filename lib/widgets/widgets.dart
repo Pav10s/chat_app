@@ -31,6 +31,11 @@ void nextScreenReplacement(context, page) {
   );
 }
 
+void pushAndRemove(context, page) {
+  Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => page), (route) => false);
+}
+
 void showSnackBar(context, message, color) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text(

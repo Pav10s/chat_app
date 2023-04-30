@@ -24,4 +24,14 @@ class HelperFunction {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getBool(userLoggedInKey);
   }
+
+  static Future<String?> getEmail() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString(userEmailKey);
+  }
+
+  static Future<String?> getUserName() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString(userNameKey);
+  }
 }
