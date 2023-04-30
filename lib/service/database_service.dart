@@ -8,9 +8,9 @@ class DatabaseService {
   final CollectionReference userCollection = FirebaseFirestore.instance.collection("users");
   final CollectionReference groupCollection = FirebaseFirestore.instance.collection("groups");
 
-  // updating usser data
+  // saving user data
 
-  Future updateUserData(String fullName, String email) async {
+  Future savingUserData(String fullName, String email) async {
     return await userCollection.doc(uid).set({
       "fullName" : fullName,
       "email" : email,

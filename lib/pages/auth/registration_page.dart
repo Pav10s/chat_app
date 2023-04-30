@@ -18,14 +18,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String email = "";
   String password = "";
   String fullName = "";
-  bool isLoading = false;
+  bool _isLoading = false;
 
   AuthService authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: isLoading
+      body: _isLoading
           ? Center(
               child: CircularProgressIndicator(
               color: Theme.of(context).primaryColor,
@@ -174,7 +174,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   register() async {
     if (formKey.currentState!.validate()) {
       setState(() {
-        isLoading = true;
+        _isLoading = true;
       });
       authService
           .registerUserWithEmailAndPassword(fullName, email, password)
@@ -188,7 +188,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         } else {
           showSnackBar(context, value, Colors.red);
           setState(() {
-            isLoading = false;
+            _isLoading = false;
           });
         }
       });
