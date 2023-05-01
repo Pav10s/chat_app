@@ -92,10 +92,14 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               onTap: () {
                 setState(() {
-                  nextScreen(context, const ProfilePage());
+                  nextScreenReplacement(
+                      context,
+                      ProfilePage(
+                        userName: userName,
+                        email: email,
+                      ));
                 });
               },
-              selectedColor: Colors.black,
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               leading: const Icon(Icons.account_circle),
@@ -137,7 +141,6 @@ class _HomePageState extends State<HomePage> {
                       );
                     });
               },
-              selectedColor: Colors.black,
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               leading: const Icon(Icons.logout),
