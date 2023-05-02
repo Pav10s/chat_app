@@ -13,6 +13,21 @@ const textDecoration = InputDecoration(
   ),
 );
 
+final createGroupDecor = InputDecoration(
+  focusedBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Color(0xFFee7b64), width: 2),
+    borderRadius: BorderRadius.circular(20),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Color(0xFFee7b64), width: 2),
+    borderRadius: BorderRadius.circular(20),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(color: Color(0xFFee7b64), width: 2),
+    borderRadius: BorderRadius.circular(20),
+  ),
+);
+
 void nextScreen(context, page) {
   Navigator.push(
     context,
@@ -48,5 +63,5 @@ void showSnackBar(context, message, color) {
       onPressed: () {},
       label: "OK",
     ),
-  ));
+    ));
 }

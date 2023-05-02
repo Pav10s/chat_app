@@ -6,7 +6,6 @@ import 'package:chat_app/service/database_service.dart';
 import 'package:chat_app/widgets/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -160,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) async {
         if (value == true) {
           QuerySnapshot snapshot =
-              await DatabaseService(FirebaseAuth.instance.currentUser!.uid)
+              await DatabaseService(uid:FirebaseAuth.instance.currentUser!.uid)
                   .getUserData(email);
           await HelperFunction.saveUserLoggedInKey(true);
           await HelperFunction.saveUserNameSF(snapshot.docs[0]["fullName"]);
