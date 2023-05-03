@@ -52,7 +52,23 @@ class DatabaseService {
 
     DocumentReference userDocumentReference = userCollection.doc(uid);
     return await userDocumentReference.update({
-      "groups": FieldValue.arrayUnion(["${groupDocumentReference.id}_$groupName"])
+      "groups":
+          FieldValue.arrayUnion(["${groupDocumentReference.id}_$groupName"])
     });
+  }
+
+  //getiing the chat
+  getChat(String groupId) async {
+    return groupCollection
+        .doc(groupId)
+        .collection("messages")
+        .orderBy("time")
+        .snapshots();
+  }
+
+  Future getGroupAdmin(String groupId) async {
+    DocumentReference documentReference = groupCollection.doc(groupId);
+    DocumentSnapshot documentSnapshot = await documentReference.get();
+    return documentSnapshot["admin"];
   }
 }
