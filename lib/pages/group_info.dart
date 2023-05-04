@@ -1,5 +1,9 @@
+import 'package:chat_app/helper/helper_function.dart';
+import 'package:chat_app/pages/home_page.dart';
 import 'package:chat_app/service/database_service.dart';
+import 'package:chat_app/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class GroupInfo extends StatefulWidget {
@@ -19,9 +23,11 @@ class GroupInfo extends StatefulWidget {
 
 class _GroupInfoState extends State<GroupInfo> {
   Stream? members;
+  String? userName;
   @override
   void initState() {
     getMember();
+    getCurrentUserIdAndName();
     super.initState();
   }
 
@@ -32,6 +38,12 @@ class _GroupInfoState extends State<GroupInfo> {
       setState(() {
         members = val;
       });
+    });
+  }
+
+  getCurrentUserIdAndName() async {
+    await HelperFunction.getUserName().then((value) {
+      userName = value!;
     });
   }
 
@@ -55,7 +67,51 @@ class _GroupInfoState extends State<GroupInfo> {
         elevation: 0,
         backgroundColor: Theme.of(context).primaryColor,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.exit_to_app))
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Exit"),
+                        content: const Text(
+                            "Are you sure you want to exit the group?"),
+                        actions: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.cancel,
+                              color: Colors.red,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              // debugPrint(widget.groupName);
+                              // debugPrint(widget.groupId);
+                              // debugPrint(widget.adminName);
+
+                              DatabaseService(
+                                      uid: FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                  .toggleGroupJoin(widget.groupId,
+                                      widget.groupName, userName!)
+                                  .whenComplete(() {
+                                nextScreenReplacement(
+                                    context, const HomePage());
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.done,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              icon: const Icon(Icons.exit_to_app))
         ],
       ),
       body: Container(
