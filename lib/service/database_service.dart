@@ -71,4 +71,8 @@ class DatabaseService {
     DocumentSnapshot documentSnapshot = await documentReference.get();
     return documentSnapshot["admin"];
   }
+
+  getGroupMembers(String groupId) async {
+    return groupCollection.doc(groupId).snapshots();
+  }
 }
