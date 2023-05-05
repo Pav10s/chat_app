@@ -1,2 +1,0 @@
-before every commit git config --global core.autocrlf true 
-watch from: 2:43:16 
