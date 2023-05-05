@@ -82,6 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 15,
                       ),
                       TextFormField(
+                        obscureText: true,
                         decoration: textDecoration.copyWith(
                           labelText: 'Password',
                           prefixIcon: Icon(
@@ -159,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) async {
         if (value == true) {
           QuerySnapshot snapshot =
-              await DatabaseService(uid:FirebaseAuth.instance.currentUser!.uid)
+              await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
                   .getUserData(email);
           await HelperFunction.saveUserLoggedInKey(true);
           await HelperFunction.saveUserNameSF(snapshot.docs[0]["fullName"]);

@@ -105,6 +105,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         height: 15,
                       ),
                       TextFormField(
+                        obscureText: true,
                         decoration: textDecoration.copyWith(
                           labelText: 'Password',
                           prefixIcon: Icon(
